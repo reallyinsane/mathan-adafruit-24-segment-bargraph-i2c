@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.mathan.breakout</groupId>
-  <artifactId>mathan-adafruit-24-segment-i2c</artifactId>
+  <artifactId>mathan-adafruit-24-segment-bargraph-i2c</artifactId>
   <version>1.0-SNAPSHOT</version>
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
