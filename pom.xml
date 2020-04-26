@@ -8,9 +8,33 @@
   <artifactId>mathan-adafruit-24-segment-bargraph-i2c</artifactId>
   <version>1.0-SNAPSHOT</version>
   <properties>
+    <license.name>AL2</license.name>
+    <license.title>${project.name}</license.title>
+    <license.owner>Matthias Hanisch</license.owner>
+    <license.mailto>matthias@mathan.io</license.mailto>
+    <license.years>2020</license.years>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
+  <inceptionYear>2020</inceptionYear>
+  <organization><name>mathan.io</name></organization>
+
+  <licenses>
+    <license>
+      <name>AL2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Matthias Hanisch</name>
+      <email>matthias@mathan.io</email>
+      <url>https://github.com/reallyinsane</url>
+    </developer>
+  </developers>
+
   <dependencies>
     <!--
     Library yad2xx from https://sourceforge.net/projects/yad2xx/ used by linking library dynamically.
@@ -28,4 +52,85 @@
     </dependency>
   </dependencies>
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>3.0</version>
+        <configuration>
+          <header>doc/license.header</header>
+          <failIfMissing>true</failIfMissing>
+          <strictCheck>true</strictCheck>
+          <properties>
+            <license.owner>${license.owner}</license.owner>
+            <license.years>${license.years}</license.years>
+            <license.mailto>${license.mailto}</license.mailto>
+            <license.title>${license.title}</license.title>
+          </properties>
+          <mapping>
+            <java>SLASHSTAR_STYLE</java>
+          </mapping>
+          <includes>
+            <include>src/*/java/**/*.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.10.3</version>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>3.0.0</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

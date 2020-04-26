@@ -1,3 +1,20 @@
+/*
+ * mathan-adafruit-24-segment-bargraph-i2c
+ * Copyright (c) 2020 Matthias Hanisch
+ * matthias@mathan.io
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package io.mathan.adafruit;
 
 import java.util.Arrays;
@@ -5,6 +22,12 @@ import java.util.List;
 import net.sf.yad2xx.FTDIException;
 import net.sf.yad2xx.mpsse.I2C;
 
+/**
+ * Using the Bargraph class you can control the 24 bars of the Adafruit 24-segment bargraph. Each bar can have one one of the following colors: red, green, yellow (red+green) or off. You need to
+ * initialize a {@link I2C I2C-Device}. Then you can create an instance of Bargraph either with <code>new Bargraph(device)</code> or <code>new Bargraph(device, address)</code>. Use the latter if you
+ * need to specify a non-default address for the device. The default address is <code>0x70</code>. Once initializes you can change the color of a bar using {@link #setBar(int, Color)}.
+ *
+ */
 public class Bargraph {
 
   private static final byte ADDRESS_DEFAULT = 0x70;
@@ -75,10 +98,16 @@ public class Bargraph {
   private final byte address;
   private final byte[] displaybuffer = new byte[6];
 
+  /**
+   * Creates an instance of Bargraph using the specified I2C device and the default address.
+   */
   public Bargraph(I2C device) throws FTDIException {
     this(device, ADDRESS_DEFAULT);
   }
 
+  /**
+   * Creates an instance of Bargraph using the specified I2C device and a custom address.
+   */
   public Bargraph(I2C device, byte address) throws FTDIException {
     this.address = address;
     this.device = device;
@@ -95,6 +124,9 @@ public class Bargraph {
     clear();
   }
 
+  /**
+   * Clears all bars, setting them to off and updates the display.
+   */
   public void clear() throws FTDIException {
     displaybuffer[0] = 0;
     displaybuffer[1] = 0;
@@ -105,6 +137,9 @@ public class Bargraph {
     update();
   }
 
+  /**
+   * Updates the display with all pending changes.
+   */
   public void update() throws FTDIException {
     this.device.transactWrite(this.address,
         CMD_DATA,
@@ -117,6 +152,11 @@ public class Bargraph {
     );
   }
 
+  /**
+   * Changes the color of a certain bar. Please note that the display is not updated immediately, you have to call {@link #update()} so that the changes will be displayed.
+   * @param bar The number of the bar, 1-24.
+   * @param color The new color of the bar.
+   */
   public void setBar(int bar, Color color) {
     Bar b = BARS.get(bar-1);
     switch (color) {
