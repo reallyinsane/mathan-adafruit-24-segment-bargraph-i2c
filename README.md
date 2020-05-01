@@ -16,7 +16,8 @@ bargraph.setBar(1, Color.RED);
 bargraph.setBar(1, Color.GREEN);
 bargraph.setBar(1, Color.YELLOW);
 bargraph.setBar(1, Color.OFF);
-
+// change a number of bars using a percentage setting, e.g. setting bar 1-12 to green
+bargraph.setPercentage(0.5, Color.GREEN);
 ```
 ## yad2xx linking
 

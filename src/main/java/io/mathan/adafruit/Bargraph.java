@@ -158,6 +158,12 @@ public class Bargraph {
    * @param color The new color of the bar.
    */
   public void setBar(int bar, Color color) {
+    if (bar<1 || bar>24) {
+      return;
+    }
+    if(color==null) {
+      color = Color.OFF;
+    }
     Bar b = BARS.get(bar-1);
     switch (color) {
       case RED:
@@ -177,6 +183,32 @@ public class Bargraph {
         off(b.index + 1, b.mask);
         break;
     }
+  }
+
+  /**
+   * Changes the color of all bars. The percentage given will make up the bars to illuminate with the given color - starting with bar 1. All other bars will be set to {@link Color#OFF}. E.g. calling
+   * <code>setPercentage(0.5, Color.RED)</code> will set bar 1 to 12 to red and bar 13 to 24 to off.
+   * @param percentage The percentage of bars to set to the given color.
+   * @param color The color to set.
+   */
+  public void setPercentage(float percentage, Color color) throws FTDIException {
+    if(percentage<0) {
+      percentage=0;
+    }
+    if(percentage>1) {
+      percentage = 1;
+    }
+    if(color==null) {
+      color = Color.OFF;
+    }
+    int bars = (int) (24*percentage);
+    for(int i=0;i<bars;i++) {
+      setBar((i+1), color);
+    }
+    for(int i=bars;i<24;i++) {
+      setBar((i+1), Color.OFF);
+    }
+    update();
   }
 
   private void on(int index, byte mask) {

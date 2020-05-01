@@ -16,8 +16,6 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
-  <inceptionYear>2020</inceptionYear>
-  <organization><name>mathan.io</name></organization>
 
   <licenses>
     <license>
