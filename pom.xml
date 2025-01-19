@@ -6,7 +6,7 @@
 
   <groupId>io.mathan.breakout</groupId>
   <artifactId>mathan-adafruit-24-segment-bargraph-i2c</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <properties>
     <license.name>AL2</license.name>
     <license.title>${project.name}</license.title>
@@ -16,6 +16,9 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
+  <name>Java-Library for Adafruit 24-segment-bargraph via I2C</name>
+  <description>A Java-Library using yad2xxJava for accessing Adafruit 24-segment-bargraph via I2C protocol.</description>
+  <url>https://github.com/reallyinsane/mathan-adafruit-24-segment-bargraph-i2c</url>
 
   <licenses>
     <license>
@@ -32,6 +35,12 @@
       <url>https://github.com/reallyinsane</url>
     </developer>
   </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/reallyinsane/mathan-adafruit-24-segment-bargraph-i2c.git</connection>
+    <developerConnection>scm:git:ssh://github.com/reallyinsane/mathan-adafruit-24-segment-bargraph-i2c.git</developerConnection>
+    <url>https://github.com/reallyinsane/mathan-adafruit-24-segment-bargraph-i2c/tree/master</url>
+  </scm>
 
   <dependencies>
     <!--
