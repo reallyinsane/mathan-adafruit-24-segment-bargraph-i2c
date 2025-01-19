@@ -39,13 +39,13 @@ public class Sample {
     for(int i=0;i<24;i++) {
       b.setBar((i+1), colors[i%3]);
       b.update();
-      d.delay(200);
+      d.delay(50);
     }
     // demonstrating percentage usage
     for(int i=0;i<=100;i++) {
       Color color = i>80?Color.RED:i>50?Color.YELLOW:Color.GREEN;
       b.setPercentage((float)i/100, color);
-      d.delay(200);
+      d.delay(25);
     }
     b.clear();
     d.close();
